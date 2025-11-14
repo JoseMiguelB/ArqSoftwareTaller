@@ -30,7 +30,6 @@ def demo_factory_method():
     print("-" * 25 + "\n")
 
 def crear_familia_completa(fabrica: FabricaElectronicos):
-    """Función helper para probar la Abstract Factory"""
     pc = fabrica.crear_computadora()
     tel = fabrica.crear_telefono()
     tab = fabrica.crear_tableta()
@@ -42,7 +41,7 @@ def crear_familia_completa(fabrica: FabricaElectronicos):
     return pc 
 
 def demo_abstract_factory():
-    print("ABSTRACT FACTORY")
+    print("ABSTRACT FACTORy")
     
     print("Creando familia de productos PREMIUM:")
     fabrica_premium = FabricaPremium()
@@ -53,12 +52,13 @@ def demo_abstract_factory():
     crear_familia_completa(fabrica_economica)
     
     print("-" * 25 + "\n")
-    return pc_premium
+    return pc_premium 
 
 def demo_prototype(producto_a_clonar: ProductoElectronico):
     print("PROTOTYPE")
     print("Producto Original:")
     producto_a_clonar.mostrar_info()
+    
     clon = producto_a_clonar.clonar()
     
     print("\nProducto Clonado:")
@@ -67,12 +67,12 @@ def demo_prototype(producto_a_clonar: ProductoElectronico):
     print(f"\n¿Producto original es el mismo que el clon? -> {producto_a_clonar is clon}")
     print("-" * 25 + "\n")
 
+
 def demo_builder():
-    print("BUILDER")
+    print("BUILDER") 
     
     builder = BuilderPCConcreta()
     director = Director(builder)
-
     director.construir_pc_gamer()
     pc_gamer = builder.producto
     pc_gamer.mostrar_info()
@@ -89,10 +89,12 @@ def demo_builder():
         .set_almacenamiento("2x 8TB NVMe SSD Gen5 RAID 0")
         .set_gpu("NVIDIA RTX 6000 Ada")
         .set_fuente_poder("2000W Titanium")
-        .producto) 
+        .set_enfriamiento("Doble Loop Refrigeración Líquida Custom")
+        .producto)
     
     pc_workstation.mostrar_info()
     print("-" * 25 + "\n")
+
 
 if __name__ == "__main__":
     demo_singleton()
