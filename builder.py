@@ -32,9 +32,14 @@ class ComputadoraBuilder(abc.ABC):
     @abc.abstractmethod
     def set_fuente_poder(self, fuente: str):
         pass
+    
+    @abc.abstractmethod
+    def set_enfriamiento(self, enfriamiento: str):
+        """Nuevo paso abstracto para el enfriamiento"""
+        pass
+
 
 class BuilderPCConcreta(ComputadoraBuilder):
-    
     def __init__(self):
         self.reiniciar()
 
@@ -66,6 +71,11 @@ class BuilderPCConcreta(ComputadoraBuilder):
     def set_fuente_poder(self, fuente: str):
         self._producto.agregar_parte("Fuente de Poder", fuente)
         return self
+    
+    def set_enfriamiento(self, enfriamiento: str):  
+        self._producto.agregar_parte("Enfriamiento", enfriamiento)
+        return self
+
 
 class Director:
     def __init__(self, builder: ComputadoraBuilder):
@@ -80,19 +90,23 @@ class Director:
         self._builder = builder
 
     def construir_pc_gamer(self):
-        """Construye una PC Gamer de alta gama"""
         print("\nDirector: Construyendo PC Gamer...")
-        self.builder.set_cpu("Intel i9-14900K")
-        self.builder.set_ram("64GB DDR5 6000MHz")
-        self.builder.set_almacenamiento("4TB NVMe SSD Gen5")
-        self.builder.set_gpu("NVIDIA RTX 4090")
-        self.builder.set_fuente_poder("1200W Platinum")
+        (self.builder
+            .set_cpu("Intel i9-14900K")
+            .set_ram("64GB DDR5 6000MHz")
+            .set_almacenamiento("4TB NVMe SSD Gen5")
+            .set_gpu("NVIDIA RTX 4090")
+            .set_fuente_poder("1200W Platinum")
+            .set_enfriamiento("Refrigeración Líquida Custom 360mm") 
+        )
 
     def construir_pc_oficina(self):
-        """Construye una PC de oficina básica"""
         print("\nDirector: Construyendo PC de Oficina...")
-        self.builder.set_cpu("Intel i5-14400")
-        self.builder.set_ram("16GB DDR4 3200MHz")
-        self.builder.set_almacenamiento("1TB NVMe SSD Gen4")
-        self.builder.set_gpu("Gráficos Integrados Intel")
-        self.builder.set_fuente_poder("500W Bronze")
+        (self.builder
+            .set_cpu("Intel i5-14400")
+            .set_ram("16GB DDR4 3200MHz")
+            .set_almacenamiento("1TB NVMe SSD Gen4")
+            .set_gpu("Gráficos Integrados Intel")
+            .set_fuente_poder("500W Bronze")
+            .set_enfriamiento("Disipador de Aire de Stock") 
+        )
